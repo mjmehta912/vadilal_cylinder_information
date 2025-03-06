@@ -23,9 +23,11 @@ void showCustomSnackbar({
     animationDuration: const Duration(milliseconds: 750),
     duration: const Duration(seconds: 4),
     overlayBlur: 5,
+    // ignore: deprecated_member_use
     overlayColor: Colors.black.withOpacity(0.3),
     boxShadows: [
       BoxShadow(
+        // ignore: deprecated_member_use
         color: Colors.black.withOpacity(0.2),
         blurRadius: 10,
         spreadRadius: 2,

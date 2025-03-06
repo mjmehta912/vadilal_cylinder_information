@@ -24,6 +24,7 @@ class CylinderInformationController extends GetxController {
           showCustomSnackbar(
             title: 'Alert!',
             message: fetchedData.message,
+            // ignore: deprecated_member_use
             backgroundColor: Colors.amber.withOpacity(0.2),
             textColor: Colors.white,
             icon: Icons.warning_amber_rounded,
@@ -34,6 +35,7 @@ class CylinderInformationController extends GetxController {
         showCustomSnackbar(
           title: 'Error',
           message: 'Error fetching data from server.',
+          // ignore: deprecated_member_use
           backgroundColor: Colors.red.withOpacity(0.2),
           textColor: Colors.white,
           icon: Icons.error_outline,
@@ -45,6 +47,7 @@ class CylinderInformationController extends GetxController {
         showCustomSnackbar(
           title: 'Error',
           message: e.toString(),
+          // ignore: deprecated_member_use
           backgroundColor: Colors.red.withOpacity(0.2),
           textColor: Colors.white,
           icon: Icons.error_outline,

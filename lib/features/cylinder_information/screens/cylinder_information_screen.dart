@@ -5,7 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vadilal_cylinder_information/features/cylinder_information/controllers/cylinder_information_controller.dart';
 
 class CylinderInformationScreen extends StatelessWidget {
-  CylinderInformationScreen({super.key});
+  CylinderInformationScreen({
+    super.key,
+  });
 
   final CylinderInformationController _controller =
       Get.find<CylinderInformationController>();
@@ -71,7 +73,7 @@ class CylinderInformationScreen extends StatelessWidget {
                               ),
                               onPressed: () => Get.back(),
                               child: Icon(
-                                Icons.arrow_back,
+                                Icons.qr_code_2,
                                 color: Colors.white,
                                 size: 30,
                               ),
@@ -92,12 +94,15 @@ class CylinderInformationScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 15, horizontal: 20),
                               decoration: BoxDecoration(
+                                // ignore: deprecated_member_use
                                 color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
+                                    // ignore: deprecated_member_use
                                     color: Colors.white.withOpacity(0.4)),
                                 boxShadow: [
                                   BoxShadow(
+                                    // ignore: deprecated_member_use
                                     color: Colors.black.withOpacity(0.1),
                                     blurRadius: 10,
                                     spreadRadius: 2,
@@ -106,7 +111,7 @@ class CylinderInformationScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Cylinder No: ${cylinderData.cylNo}",
+                                  "Cylinder No : ${cylinderData.cylNo}",
                                   style: GoogleFonts.poppins(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w600,
@@ -117,71 +122,84 @@ class CylinderInformationScreen extends StatelessWidget {
                             ),
 
                             const SizedBox(height: 20),
-
-                            // Floating Glass Card with Data
                             Expanded(
-                              child: SingleChildScrollView(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 15, sigmaY: 15),
-                                    child: Container(
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.all(20),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: BackdropFilter(
+                                  filter:
+                                      ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      // ignore: deprecated_member_use
+                                      color: Colors.white.withOpacity(0.1),
+                                      border: Border.all(
                                         // ignore: deprecated_member_use
-                                        color: Colors.white.withOpacity(0.1),
-                                        border: Border.all(
-                                            // ignore: deprecated_member_use
-                                            color:
-                                                Colors.white.withOpacity(0.3)),
+                                        color: Colors.white.withOpacity(0.3),
                                       ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          buildInfoItem(
-                                              "Return No", cylinderData.rtnNo),
-                                          buildInfoItem(
-                                              "Manufacturer", cylinderData.mnf),
-                                          buildInfoItem(
-                                              "Gas Type", cylinderData.gas),
-                                          buildInfoItem("Tare Weight",
-                                              cylinderData.tareWeight),
-                                          buildInfoItem(
-                                              "HD Date", cylinderData.hDDate),
-                                          buildInfoItem("Is Imported",
-                                              cylinderData.isImported),
-                                          buildInfoItem(
-                                              "Owner", cylinderData.owner),
-                                          buildInfoItem("Heat Date",
-                                              cylinderData.heatDate),
-                                          buildInfoItem("Paint Date",
-                                              cylinderData.paintdate),
-                                          buildInfoItem("Next Testing Date",
-                                              cylinderData.nxtHDtstingDt),
-                                          buildInfoItem(
-                                              "Item Name", cylinderData.iName),
-                                          buildInfoItem(
-                                              "Make", cylinderData.make),
-                                          buildInfoItem(
-                                              "Batch No", cylinderData.batchNo),
-                                          buildInfoItem("Specification No",
-                                              cylinderData.specificationNo),
-                                          buildInfoItem("Certificate No",
-                                              cylinderData.certificateNo),
-                                          buildInfoItem("Certificate Date",
-                                              cylinderData.certificateDate),
-                                          buildInfoItem(
-                                              "Bill No", cylinderData.billNo),
-                                          buildInfoItem("Bill Date",
-                                              cylinderData.billDate),
-                                          buildInfoItem("Supplier Name",
-                                              cylinderData.suppName),
-                                        ],
-                                      ),
+                                    ),
+                                    child: LayoutBuilder(
+                                      builder: (context, constraints) {
+                                        return ConstrainedBox(
+                                          constraints: BoxConstraints(
+                                            maxHeight: constraints
+                                                .maxHeight, // ✅ Ensures full visibility
+                                          ),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                buildInfoItem("Rotation No",
+                                                    cylinderData.rtnNo),
+                                                buildInfoItem("Manufacturer",
+                                                    cylinderData.mnf),
+                                                buildInfoItem("Gas Type",
+                                                    cylinderData.gas),
+                                                buildInfoItem("Tare Weight",
+                                                    cylinderData.tareWeight),
+                                                buildInfoItem("HD Date",
+                                                    cylinderData.hDDate),
+                                                buildInfoItem("Is Imported",
+                                                    cylinderData.isImported),
+                                                buildInfoItem("Owner",
+                                                    cylinderData.owner),
+                                                buildInfoItem("Heat Date",
+                                                    cylinderData.heatDate),
+                                                buildInfoItem("Paint Date",
+                                                    cylinderData.paintdate),
+                                                buildInfoItem(
+                                                    "Next Testing Date",
+                                                    cylinderData.nxtHDtstingDt),
+                                                buildInfoItem("Item Name",
+                                                    cylinderData.iName),
+                                                buildInfoItem(
+                                                    "Make", cylinderData.make),
+                                                buildInfoItem("Batch No",
+                                                    cylinderData.batchNo),
+                                                buildInfoItem(
+                                                    "Specification No",
+                                                    cylinderData
+                                                        .specificationNo),
+                                                buildInfoItem("Certificate No",
+                                                    cylinderData.certificateNo),
+                                                buildInfoItem(
+                                                    "Certificate Date",
+                                                    cylinderData
+                                                        .certificateDate),
+                                                buildInfoItem("Bill No",
+                                                    cylinderData.billNo),
+                                                buildInfoItem("Bill Date",
+                                                    cylinderData.billDate),
+                                                buildInfoItem("Supplier Name",
+                                                    cylinderData.suppName),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
@@ -203,13 +221,15 @@ class CylinderInformationScreen extends StatelessWidget {
                               ),
                               onPressed: () => Get.back(),
                               child: Icon(
-                                Icons.arrow_back,
+                                Icons.qr_code_2,
                                 color: Colors.white,
                                 size: 30,
                               ),
                             ),
 
-                            const SizedBox(height: 40),
+                            const SizedBox(
+                              height: 40,
+                            ),
                           ],
                         ),
                       );
@@ -235,14 +255,17 @@ class CylinderInformationScreen extends StatelessWidget {
                           // ignore: deprecated_member_use
                           backgroundColor: Colors.white.withOpacity(0.2),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 15),
+                            horizontal: 40,
+                            vertical: 15,
+                          ),
                           elevation: 5,
                         ),
                         onPressed: () => Get.back(),
                         child: Icon(
-                          Icons.arrow_back,
+                          Icons.qr_code_2,
                           color: Colors.white,
                           size: 30,
                         ),
@@ -267,7 +290,7 @@ class CylinderInformationScreen extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              "$title: ",
+              "$title ",
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -284,6 +307,7 @@ class CylinderInformationScreen extends StatelessWidget {
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
+                // ignore: deprecated_member_use
                 color: Colors.white.withOpacity(0.9),
               ),
               textAlign: TextAlign.right,

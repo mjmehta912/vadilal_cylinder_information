@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vadilal_cylinder_information/features/cylinder_information/controllers/cylinder_information_controller.dart';
+import 'package:vadilal_cylinder_information/features/cylinder_information/screens/qr_scanner_screen.dart';
 
 class CylinderInformationScreen extends StatelessWidget {
   CylinderInformationScreen({
@@ -38,10 +39,14 @@ class CylinderInformationScreen extends StatelessWidget {
                 return const Center(
                   child: CircularProgressIndicator(color: Colors.white),
                 );
-              } else if (_controller.cylinderInformation.value != null) {
+              } else if (_controller.cylinderInformation.value != null &&
+                  _controller.cylinderStatus.value != null) {
                 final cylinderInformation =
                     _controller.cylinderInformation.value!;
+
+                final cylinderStatus = _controller.cylinderStatus.value!;
                 final cylinderData = cylinderInformation.data;
+                final cylinderStatusData = cylinderStatus.data;
 
                 return cylinderData == null
                     ? Center(
@@ -92,7 +97,9 @@ class CylinderInformationScreen extends StatelessWidget {
                             Container(
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 20),
+                                vertical: 15,
+                                horizontal: 20,
+                              ),
                               decoration: BoxDecoration(
                                 // ignore: deprecated_member_use
                                 color: Colors.white.withOpacity(0.2),
@@ -110,18 +117,36 @@ class CylinderInformationScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Center(
-                                child: Text(
-                                  "Cylinder No : ${cylinderData.cylNo}",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Cylinder No : ${cylinderData.cylNo}",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Rotation No : ${cylinderData.rtnNo}",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
 
-                            const SizedBox(height: 20),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             Expanded(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
@@ -152,49 +177,39 @@ class CylinderInformationScreen extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                buildInfoItem("Rotation No",
-                                                    cylinderData.rtnNo),
-                                                buildInfoItem("Manufacturer",
-                                                    cylinderData.mnf),
-                                                buildInfoItem("Gas Type",
-                                                    cylinderData.gas),
-                                                buildInfoItem("Tare Weight",
-                                                    cylinderData.tareWeight),
-                                                buildInfoItem("HD Date",
-                                                    cylinderData.hDDate),
-                                                buildInfoItem("Is Imported",
-                                                    cylinderData.isImported),
-                                                buildInfoItem("Owner",
-                                                    cylinderData.owner),
-                                                buildInfoItem("Heat Date",
-                                                    cylinderData.heatDate),
-                                                buildInfoItem("Paint Date",
-                                                    cylinderData.paintdate),
                                                 buildInfoItem(
-                                                    "Next Testing Date",
+                                                    "Water Capacity",
+                                                    cylinderData
+                                                        .cylinderTypeName),
+                                                buildInfoItem(
+                                                    "Make Of Cylinder",
+                                                    cylinderData.mnf),
+                                                buildInfoItem('Valve',
+                                                    cylinderData.valve),
+                                                buildInfoItem('Valve Make',
+                                                    cylinderData.make),
+                                                buildInfoItem(
+                                                    "HydroTesting Date",
+                                                    cylinderData.hDDate),
+                                                buildInfoItem(
+                                                    "Next HydroTesting Date",
                                                     cylinderData.nxtHDtstingDt),
-                                                buildInfoItem("Item Name",
+                                                buildInfoItem(
+                                                    "Group", cylinderData.gas),
+                                                buildInfoItem("Gas Service",
                                                     cylinderData.iName),
                                                 buildInfoItem(
-                                                    "Make", cylinderData.make),
-                                                buildInfoItem("Batch No",
-                                                    cylinderData.batchNo),
+                                                  "Batch No.",
+                                                  cylinderStatusData!.batchNo,
+                                                ),
                                                 buildInfoItem(
-                                                    "Specification No",
-                                                    cylinderData
-                                                        .specificationNo),
-                                                buildInfoItem("Certificate No",
-                                                    cylinderData.certificateNo),
+                                                  "Batch Date.",
+                                                  cylinderStatusData.batchDate,
+                                                ),
                                                 buildInfoItem(
-                                                    "Certificate Date",
-                                                    cylinderData
-                                                        .certificateDate),
-                                                buildInfoItem("Bill No",
-                                                    cylinderData.billNo),
-                                                buildInfoItem("Bill Date",
-                                                    cylinderData.billDate),
-                                                buildInfoItem("Supplier Name",
-                                                    cylinderData.suppName),
+                                                  "Volume Of Gas",
+                                                  '${cylinderStatusData.eunitQty} ${cylinderStatusData.eunit}',
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -206,7 +221,9 @@ class CylinderInformationScreen extends StatelessWidget {
                               ),
                             ),
 
-                            const SizedBox(height: 20),
+                            const SizedBox(
+                              height: 20,
+                            ),
 
                             // Neumorphic Styled Button
                             ElevatedButton(
@@ -219,7 +236,12 @@ class CylinderInformationScreen extends StatelessWidget {
                                     horizontal: 40, vertical: 15),
                                 elevation: 5,
                               ),
-                              onPressed: () => Get.back(),
+                              onPressed: () {
+                                Get.offUntil(
+                                  GetPageRoute(page: () => QrScannerScreen()),
+                                  (route) => false,
+                                );
+                              },
                               child: Icon(
                                 Icons.qr_code_2,
                                 color: Colors.white,

@@ -40,6 +40,7 @@ class CylinderDataDm {
   String billNo;
   String billDate;
   String suppName;
+  String valve;
 
   CylinderDataDm({
     required this.cylNo,
@@ -63,6 +64,7 @@ class CylinderDataDm {
     required this.billNo,
     required this.billDate,
     required this.suppName,
+    required this.valve,
   });
 
   factory CylinderDataDm.fromJson(Map<String, dynamic> json) {
@@ -88,6 +90,7 @@ class CylinderDataDm {
       billNo: json['BillNo'] ?? '',
       billDate: json['BillDate'] ?? '',
       suppName: json['SuppName'] ?? '',
+      valve: json['Valve'] ?? '',
     );
   }
 }

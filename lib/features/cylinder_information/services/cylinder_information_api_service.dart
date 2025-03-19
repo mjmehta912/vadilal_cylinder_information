@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:vadilal_cylinder_information/features/cylinder_information/models/cylinder_info_dm.dart';
+import 'package:vadilal_cylinder_information/features/cylinder_information/models/cylinder_status_dm.dart';
 
 class CylinderInformationApiService {
   static const String baseUrl = 'https://testcrm2.vadilalchemicals.in/api';
@@ -16,6 +17,24 @@ class CylinderInformationApiService {
 
     if (response.statusCode == 200) {
       return CylinderInfoDm.fromJson(
+        json.decode(response.body),
+      );
+    } else {
+      return null;
+    }
+  }
+
+  static Future<CylinderStatusDm?> fetchCylinderStatus(
+    String cylinderNo,
+  ) async {
+    final response = await http.get(
+      Uri.parse(
+        '$baseUrl/CylinderEnquiry/cylinderStatus?cylinderNo=$cylinderNo',
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return CylinderStatusDm.fromJson(
         json.decode(response.body),
       );
     } else {

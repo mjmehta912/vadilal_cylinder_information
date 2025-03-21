@@ -266,6 +266,7 @@ class CylinderInformationScreen extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
+
                             RichText(
                               text: TextSpan(
                                 style: GoogleFonts.poppins(
@@ -374,36 +375,8 @@ class CylinderInformationScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 40,
                       ),
-                      RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                          ), // Default style
-                          children: [
-                            TextSpan(text: "Developed by "),
-                            TextSpan(
-                              text: "Jinee Infotech",
-                              style: TextStyle(
-                                color: Colors.green,
-                                decoration: TextDecoration.underline,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  final Uri url = Uri.parse(
-                                      "https://jinee.in/Default.aspx");
-                                  if (await canLaunchUrl(url)) {
-                                    await launchUrl(url,
-                                        mode: LaunchMode.externalApplication);
-                                  }
-                                },
-                            ),
-                            TextSpan(text: " | v1.0.0"),
-                          ],
-                        ),
-                      )
                     ],
                   ),
                 );

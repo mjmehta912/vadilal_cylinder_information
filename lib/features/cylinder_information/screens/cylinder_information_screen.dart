@@ -288,9 +288,11 @@ class CylinderInformationScreen extends StatelessWidget {
                                         final Uri url = Uri.parse(
                                             "https://jinee.in/Default.aspx");
                                         if (await canLaunchUrl(url)) {
-                                          await launchUrl(url,
-                                              mode: LaunchMode
-                                                  .externalApplication);
+                                          await launchUrl(
+                                            url,
+                                            mode:
+                                                LaunchMode.externalApplication,
+                                          );
                                         }
                                       },
                                   ),

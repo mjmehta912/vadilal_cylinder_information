@@ -1,9 +1,12 @@
 import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vadilal_cylinder_information/features/cylinder_information/controllers/cylinder_information_controller.dart';
 import 'package:vadilal_cylinder_information/features/cylinder_information/screens/qr_scanner_screen.dart';
+import 'package:vadilal_cylinder_information/features/cylinder_information/services/version_info_service.dart';
 
 class CylinderInformationScreen extends StatelessWidget {
   CylinderInformationScreen({
@@ -261,7 +264,74 @@ class CylinderInformationScreen extends StatelessWidget {
                             ),
 
                             const SizedBox(
-                              height: 40,
+                              height: 20,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                                children: [
+                                  TextSpan(text: "Developed by "),
+                                  TextSpan(
+                                    text: "Jinee Infotech",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      color: Colors.green,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.green,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        final Uri url = Uri.parse(
+                                            "https://jinee.in/Default.aspx");
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url,
+                                              mode: LaunchMode
+                                                  .externalApplication);
+                                        }
+                                      },
+                                  ),
+                                  TextSpan(text: "  |  "),
+                                  WidgetSpan(
+                                    child: FutureBuilder<String>(
+                                      future: VersionService.getVersion(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Text(
+                                            "v...",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            "vError",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Colors.red,
+                                            ),
+                                          );
+                                        } else {
+                                          return Text(
+                                            "v${snapshot.data}",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
                             ),
                           ],
                         ),
@@ -281,7 +351,7 @@ class CylinderInformationScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -303,6 +373,37 @@ class CylinderInformationScreen extends StatelessWidget {
                           size: 30,
                         ),
                       ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                          ), // Default style
+                          children: [
+                            TextSpan(text: "Developed by "),
+                            TextSpan(
+                              text: "Jinee Infotech",
+                              style: TextStyle(
+                                color: Colors.green,
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  final Uri url = Uri.parse(
+                                      "https://jinee.in/Default.aspx");
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url,
+                                        mode: LaunchMode.externalApplication);
+                                  }
+                                },
+                            ),
+                            TextSpan(text: " | v1.0.0"),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 );

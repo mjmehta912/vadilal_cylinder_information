@@ -197,10 +197,10 @@ class CylinderInformationScreen extends StatelessWidget {
                                                 buildInfoItem(
                                                     "Group", cylinderData.gas),
                                                 buildInfoItem("Gas Service",
-                                                    cylinderData.iName),
+                                                    cylinderStatusData!.iname),
                                                 buildInfoItem(
                                                   "Batch No.",
-                                                  cylinderStatusData!.batchNo,
+                                                  cylinderStatusData.batchNo,
                                                 ),
                                                 buildInfoItem(
                                                   "Batch Date.",

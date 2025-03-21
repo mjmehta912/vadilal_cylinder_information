@@ -36,6 +36,7 @@ class CylinderStatusDataDm {
   String date;
   String pName;
   String batchDate;
+  String igName;
 
   CylinderStatusDataDm({
     required this.iname,
@@ -53,6 +54,7 @@ class CylinderStatusDataDm {
     required this.date,
     required this.pName,
     required this.batchDate,
+    required this.igName,
   });
 
   factory CylinderStatusDataDm.fromJson(Map<String, dynamic> json) {
@@ -72,6 +74,7 @@ class CylinderStatusDataDm {
       date: json['DATE'] ?? '',
       pName: json['PNAME'] ?? '',
       batchDate: json['BatchDate'] ?? '',
+      igName: json['IGNAME'] ?? '',
     );
   }
 }

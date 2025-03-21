@@ -178,26 +178,37 @@ class CylinderInformationScreen extends StatelessWidget {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 buildInfoItem(
-                                                    "Water Capacity",
-                                                    cylinderData
-                                                        .cylinderTypeName),
+                                                  "Water Capacity",
+                                                  cylinderData.cylinderTypeName,
+                                                ),
                                                 buildInfoItem(
-                                                    "Make Of Cylinder",
-                                                    cylinderData.mnf),
-                                                buildInfoItem('Valve',
-                                                    cylinderData.valve),
-                                                buildInfoItem('Valve Make',
-                                                    cylinderData.make),
+                                                  "Make Of Cylinder",
+                                                  cylinderData.mnf,
+                                                ),
                                                 buildInfoItem(
-                                                    "HydroTesting Date",
-                                                    cylinderData.hDDate),
+                                                  'Valve',
+                                                  cylinderData.valve,
+                                                ),
                                                 buildInfoItem(
-                                                    "Next HydroTesting Date",
-                                                    cylinderData.nxtHDtstingDt),
+                                                  'Valve Make',
+                                                  cylinderData.make,
+                                                ),
                                                 buildInfoItem(
-                                                    "Group", cylinderData.gas),
-                                                buildInfoItem("Gas Service",
-                                                    cylinderStatusData!.iname),
+                                                  "HydroTesting Date",
+                                                  cylinderData.hDDate,
+                                                ),
+                                                buildInfoItem(
+                                                  "Next HydroTesting Date",
+                                                  cylinderData.nxtHDtstingDt,
+                                                ),
+                                                buildInfoItem(
+                                                  "Group",
+                                                  cylinderStatusData!.igName,
+                                                ),
+                                                buildInfoItem(
+                                                  "Gas Service",
+                                                  cylinderStatusData.iname,
+                                                ),
                                                 buildInfoItem(
                                                   "Batch No.",
                                                   cylinderStatusData.batchNo,
